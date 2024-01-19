@@ -13,17 +13,6 @@ public class Main {
                 max = liczba;
             }
 
-    //Random random = new Random();
-       // int Real = random.nextInt(4);
-       // System.out.println("Trzy odbicia, jedno prawdziwe");
-      // int i;
-      // for (i = 0; i < 3; i++) {
-           // System.out.println("...");
-      // }
-       // if (i == Real) {
-        //    System.out.println("Odbicie było prawdziwe");
-       // } else {
-       //     System.out.println("Odbicie Było fałszywe");
         }
         return max;
         }
