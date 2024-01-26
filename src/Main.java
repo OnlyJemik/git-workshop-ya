@@ -3,94 +3,27 @@ import java.util.Scanner;
 
 public class Main {
     static String[][] plansza = {{"-", "-", "-"},{"-", "-", "-"},{"-", "-", "-"}};
+    static boolean koniec = false;
+    public static int ruchy = 0;
     public static void main(String[] args) {
-        for(int i = 0; i<5; i++) {
+        while (!koniec) {
             ruch(plansza);
         }
     }
-
-    static void sprawdzWinO(){
-
-        if(plansza[0][0].equals("O") && plansza[0][1].equals("O") && plansza[0][2].equals("O")) {
-            System.out.println("Gracz 1 wygrał!");
-            System.exit(-1);
-        }else{
-            if(plansza[0][0].equals("O") && plansza[1][1].equals("O") && plansza[2][2].equals("O")) {
-                System.out.println("Gracz 1 wygrał!");
-                System.exit(-1);
-            }else{
-                if(plansza[0][0].equals("O") && plansza[1][0].equals("O") && plansza[2][0].equals("O")) {
-                    System.out.println("Gracz 1 wygrał!");
-                    System.exit(-1);
-                }else{
-                    if(plansza[1][0].equals("O") && plansza[1][1].equals("O") && plansza[1][2].equals("O")) {
-                        System.out.println("Gracz 1 wygrał!");
-                        System.exit(-1);
-                    }else{
-                        if(plansza[2][0].equals("O") && plansza[2][1].equals("O") && plansza[2][2].equals("O")) {
-                            System.out.println("Gracz 1 wygrał!");
-                            System.exit(-1);
-                        }else{
-                            if(plansza[0][1].equals("O") && plansza[1][1].equals("O") && plansza[2][1].equals("O")) {
-                                System.out.println("Gracz 1 wygrał!");
-                                System.exit(-1);
-                            }else{
-                                if(plansza[0][2].equals("O") && plansza[1][2].equals("O") && plansza[2][2].equals("O")) {
-                                    System.out.println("Gracz 1 wygrał!");
-                                    System.exit(-1);
-                                }else{
-                                    if(plansza[0][2].equals("O") && plansza[2][1].equals("O") && plansza[2][0].equals("O")) {
-                                        System.out.println("Gracz 1 wygrał!");
-                                        System.exit(-1);
-                                    }
-                                }
-                            }
-                        }
-                    }
+    static void sprawdzWin(String gracz) {
+        for (int i = 0; i < 3; i++) {
+            boolean Owygra = true;
+            for (int j = 0; j < 3; j++) {
+                if (!plansza[i][j].equals(gracz)) {
+                    Owygra = false;
+                    break;
                 }
             }
-        }
-    }
+            if (Owygra) {
+                System.out.println("Gracz wygrał");
+                koniec = true;
 
-    static void sprawdzWinX(){
 
-        if(plansza[0][0].equals("X") && plansza[0][1].equals("O") && plansza[0][2].equals("X")) {
-            System.out.println("Gracz 2 wygrał!");
-            System.exit(-1);
-        }else{
-            if(plansza[0][0].equals("X") && plansza[1][1].equals("X") && plansza[2][2].equals("X")) {
-                System.out.println("Gracz 2 wygrał!");
-                System.exit(-1);
-            }else{
-                if(plansza[0][0].equals("X") && plansza[1][0].equals("X") && plansza[2][0].equals("X")) {
-                    System.out.println("Gracz 2 wygrał!");
-                    System.exit(-1);
-                }else{
-                    if(plansza[1][0].equals("X") && plansza[1][1].equals("X") && plansza[1][2].equals("X")) {
-                        System.out.println("Gracz 2 wygrał!");
-                        System.exit(-1);
-                    }else{
-                        if(plansza[2][0].equals("X") && plansza[2][1].equals("X") && plansza[2][2].equals("X")) {
-                            System.out.println("Gracz 2 wygrał!");
-                            System.exit(-1);
-                        }else{
-                            if(plansza[0][1].equals("X") && plansza[1][1].equals("X") && plansza[2][1].equals("X")) {
-                                System.out.println("Gracz 2 wygrał!");
-                                System.exit(-1);
-                            }else{
-                                if(plansza[0][2].equals("X") && plansza[1][2].equals("X") && plansza[2][2].equals("X")) {
-                                    System.out.println("Gracz 2 wygrał!");
-                                    System.exit(-1);
-                                }else{
-                                    if(plansza[0][2].equals("X") && plansza[2][1].equals("X") && plansza[2][0].equals("X")) {
-                                        System.out.println("Gracz 2 wygrał!");
-                                        System.exit(-1);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
             }
         }
     }
@@ -106,10 +39,10 @@ public class Main {
         System.out.println("y: ");
         ymove = Integer.parseInt(y.nextLine());
 
-        plansza[xmove][ymove] = "0";
+        plansza[xmove][ymove] = "O";
         pokazPlansze();
-        sprawdzWinO();
-
+        sprawdzWin("O");
+        if (koniec) return;
         System.out.println("Gracz 2 wpisuje ruch.");
         System.out.println("x: ");
         xmove = Integer.parseInt(x.nextLine());
@@ -118,9 +51,9 @@ public class Main {
 
         plansza[xmove][ymove] = "X";
         pokazPlansze();
-        sprawdzWinX();
+        sprawdzWin("X");
+        if (koniec) return;
     }
-
     static void pokazPlansze(){
         System.out.println(Arrays.deepToString(plansza[0]));
         System.out.println(Arrays.deepToString(plansza[1]));
